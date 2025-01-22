@@ -10,6 +10,7 @@ const HomePage = () => {
         const getBooks = async () => {
             try {
                 const data = await fetchBooks();
+                //console.log(data)
                 setBooks(data);
             } catch (error) {
                 console.error('Error fetching books:', error);

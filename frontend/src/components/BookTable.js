@@ -13,7 +13,7 @@ const BookTable = ({books}) => {
                 </tr>
             </thead>
             <tbody>
-                {books.map((book, index) => {
+                {books.map((book, index) => (
                     <tr key={index}>
                     <td>{book.title}</td>
                     <td>{book.author}</td>
@@ -21,7 +21,7 @@ const BookTable = ({books}) => {
                     <td>{book.stock}</td>
                     <td>{book.price.toFixed(2)} EUR</td>
                 </tr>
-                })}
+                ))}
             </tbody>
         </table>
     );

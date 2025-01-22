@@ -6,6 +6,6 @@ App works as SPA.
 
 Technologies:
     - React, React-Router-Dom, Axios, Mui
-    - FastAPI, Uvicorn
+    - FastAPI, Uvicorn, Fastapi-cors
     - Docker/Kuberenetes
 
