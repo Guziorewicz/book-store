@@ -9,15 +9,7 @@ class Book(BaseModel):
     stock: int
     price: float
 
-class User(BaseModel):
-    id: int
-    email: str
-
-class CartItem(BaseModel):
-    book_id: int
-    amount: int
-
 
 class Cart(BaseModel):
     user_id: int
-    cart: List[CartItem]
+    cart: List[Book]

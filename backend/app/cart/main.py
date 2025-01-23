@@ -1,7 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes.books import book_router
-from routes.cart import cart_router
+from .routes.cart import cart_router
+
+'''
+This is backend used to operate books data
+Hosted via `uvicorn cart.main:app --reload --port 8001`
+'''
 
 app = FastAPI()
 
@@ -13,10 +17,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Register book router
-
-app.include_router(book_router, prefix="/books", tags=["Books"])
 
 # Register cart router
 app.include_router(cart_router, prefix="/cart", tags=["Cart"])
