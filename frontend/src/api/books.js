@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/books';
+const API_URL = 'http://localhost:8000/';
 
 export const fetchBooks = async () => {
     try {
-        const response = await axios.get(API_URL);
+        const response = await axios.get(API_URL + 'books');
         return response.data;
     } catch (error) {
         console.error('Error fetching books', error);

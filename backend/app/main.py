@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.books import book_router
+from routes.cart import cart_router
 
 app = FastAPI()
 
@@ -17,6 +18,10 @@ app.add_middleware(
 
 app.include_router(book_router, prefix="/books", tags=["Books"])
 
+# Register cart router
+app.include_router(cart_router, prefix="/cart", tags=["Cart"])
+
+# Test route
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the bookstore API!"}

@@ -18,6 +18,7 @@ const BookTable = ({books}) => {
     }
 
     const handleConfirmAdd = (id, amount) => {
+        // Add api to backend with user_id
         console.log("Dodano do koszyka");
         handleCloseModal();
     }

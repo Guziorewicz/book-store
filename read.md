@@ -9,3 +9,8 @@ Technologies:
     - FastAPI, Uvicorn, Fastapi-cors
     - Docker/Kuberenetes
 
+
+
+todoooo 
+- fetch order poprawić na pobieranie danych o książkach na podstawie zawartości koszyka
+- dodać dodawanie i odejmowanie obiektów z koszyka 
