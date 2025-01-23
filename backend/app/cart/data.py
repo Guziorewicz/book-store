@@ -12,7 +12,7 @@ users = [
 carts = [
   {
     "user_id": 1,
-    "cart": [{"book_id" : 1}, {"amount" : 1}]
+    "cart": []
   },
   {
     "user_id": 2,

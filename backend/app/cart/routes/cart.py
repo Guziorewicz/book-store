@@ -5,15 +5,22 @@ from ..data import users, carts
 cart_router = APIRouter()
 
 
-# Get cart
-# @cart_router.get("/{user_id}")
-# def get_cart(user_id: int):
-#     user_cart = next((cart for cart in carts if cart["user_id"] == user_id), None)
+# Find cart or create new
+@cart_router.get("/{user_id}")
+def get_cart(user_id: int):
+    user_cart = next((cart for cart in carts if cart["user_id"] == user_id), None)
+    if user_cart is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user_cart
 
-#     if user_cart is None:
-#         raise HTTPException(status=404, detail="Cart not found")
-    
-#     return user_cart
+# Add order to cart
+@cart_router.post("/{user_id}/add")
+def update_cart(user_id: int, order: Book):
+    # Find cart
+    user_cart = next((cart for cart in carts if cart["user_id"] == user_id), None)
+    # Add Books
+    user_cart["cart"].append(order)
+    return {"Books added to cart"}
 
 # # Get books from cart
 # @cart_router.get("/books/{user_id}")
@@ -26,14 +33,7 @@ cart_router = APIRouter()
 # def find_book_by_id(book_id: int) -> Book:
 #     return next((book for book in books if book["id"] == book_id), None)
 
-# # Find cart or create new
-# def get_or_create_cart(user_id: int) -> Cart:
-#     user_cart = next((cart for cart in carts if cart["user_id"] == user_id), None)
-#     if user_cart is None:
-#         new_cart = Cart(user_id=user_id, cart=[])
-#         carts.append(new_cart)
-#         return new_cart
-#     return user_cart
+
 
 
 # @cart_router.post("/{user_id}")

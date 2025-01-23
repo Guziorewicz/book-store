@@ -7,4 +7,5 @@ class Book(BaseModel):
     pages: int
     stock: int
     price: float
+    reservated: int
 

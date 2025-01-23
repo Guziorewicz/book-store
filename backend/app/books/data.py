@@ -5,7 +5,8 @@ books = [
       "author": "Andrew Hunt",
       "pages": 352,
       "stock": 12,
-      "price": 45.99
+      "price": 45.99,
+      "reservated": 0
     },
     {
       "id": 2,
@@ -13,7 +14,8 @@ books = [
       "author": "Robert C. Martin",
       "pages": 464,
       "stock": 8,
-      "price": 39.99
+      "price": 39.99,
+      "reservated": 0
     },
     {
       "id": 3,
@@ -21,7 +23,8 @@ books = [
       "author": "Thomas H. Cormen",
       "pages": 1312,
       "stock": 5,
-      "price": 89.95
+      "price": 89.95,
+      "reservated": 0
     },
     {
       "id": 4,
@@ -29,7 +32,8 @@ books = [
       "author": "Erich Gamma",
       "pages": 416,
       "stock": 7,
-      "price": 54.95
+      "price": 54.95,
+      "reservated": 0
     },
     {
       "id": 5,
@@ -37,7 +41,8 @@ books = [
       "author": "Donald Knuth",
       "pages": 672,
       "stock": 3,
-      "price": 199.99
+      "price": 199.99,
+      "reservated": 0
     },
     {
       "id": 6,
@@ -45,7 +50,8 @@ books = [
       "author": "Kyle Simpson",
       "pages": 298,
       "stock": 20,
-      "price": 29.99
+      "price": 29.99,
+      "reservated": 0
     },
     {
       "id": 7,
@@ -53,7 +59,8 @@ books = [
       "author": "Eric Freeman",
       "pages": 694,
       "stock": 15,
-      "price": 49.99
+      "price": 49.99,
+      "reservated": 0
     },
     {
       "id": 8,
@@ -61,7 +68,8 @@ books = [
       "author": "Eric Matthes",
       "pages": 544,
       "stock": 18,
-      "price": 39.95
+      "price": 39.95,
+      "reservated": 0
     },
     {
       "id": 9,
@@ -69,7 +77,8 @@ books = [
       "author": "Aditya Bhargava",
       "pages": 256,
       "stock": 10,
-      "price": 34.99
+      "price": 34.99,
+      "reservated": 0
     },
     {
       "id": 10,
@@ -77,9 +86,11 @@ books = [
       "author": "Martin Fowler",
       "pages": 448,
       "stock": 6,
-      "price": 47.95
+      "price": 47.95,
+      "reservated": 0
     }
-  ]
+]
+
 
 users = [
   {
