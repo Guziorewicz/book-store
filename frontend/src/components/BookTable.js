@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import AddToCart from './Amount'
+import { checkAmount } from '../api/books';
+import { addOrderToCart } from '../api/orders';
 
 const BookTable = ({books}) => {
 
@@ -18,8 +20,47 @@ const BookTable = ({books}) => {
     }
 
     const handleConfirmAdd = (id, amount) => {
+        
+        // Take book position with amount 
+        if(selectedBook.id === id) {
+            // Check if amount of books is avaliable books-api
+            try {
+                checkAmount(id, amount);
+                // Remember to get books from stock
+
+                        // If 200 then add books data to cart via orders-api
+                    try {
+                        // Prepare to send
+                        const order = {
+                            id: selectedBook.id,
+                            title: selectedBook.title,
+                            author: selectedBook.author,
+                            pages: selectedBook.pages,
+                            stock: amount,
+                            price: selectedBook.price
+                        }
+                        addOrderToCart({order});
+                    
+                    } catch (error) {
+                        console.log("Error with adding to cart", error);
+                    } 
+                    // Confirm order and get reservation from stock
+                
+            } catch (error) {
+                console.log("Not on stock", error);
+            } 
+            
+        } else {
+            console.error("Something goes wrong, try again");
+            return;
+        }
+        console.log(selectedBook);
+        console.log(amount);
+        
+
+
         // Add api to backend with user_id
-        console.log("Dodano do koszyka");
+        //console.log("Dodano do koszyka");
         handleCloseModal();
     }
 

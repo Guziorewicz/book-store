@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import DeleteFromCart from './ItemDeletion';
+import { removeFromCart } from '../api/orders'
 
 const ShoppingCart = ({cart}) => {
 
+    const [selectedToDelete, setSelectedToDelete] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleRemoveItemClick = (item) => {
+        setSelectedToDelete(item);
+        setIsModalOpen(true);
+    } 
+
+    const handleCloseModal = () => {
+        setSelectedToDelete(null);
+        setIsModalOpen(false);
+    }
     
     const handleRemoveOrder = (item) => {
-        console.log(`Usunięto ${item.name}`);
+        try {
+            removeFromCart(item);
+            console.log(`Removed ${item.name}`);
+        } catch (error) {
+            console.log("Error with removing", error);
+        }
     }
 
 
@@ -17,23 +36,32 @@ const ShoppingCart = ({cart}) => {
                     <th>Author</th>
                     <th>Pages</th>
                     <th>Stock</th>
-                    <th>Price</th>
+                    <th>Unit Price</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                {cart.map((item) => (
+                {cart.cart.map((item) => (
                     <tr key={item.id}>
                     <td>{item.title}</td>
                     <td>{item.author}</td>
                     <td>{item.pages}</td>
                     <td>{item.stock}</td>
                     <td>{item.price.toFixed(2)} EUR</td>
-                    <td><button onClick={() => handleRemoveOrder(item)}>X</button></td>
+                    <td><button onClick={() => handleRemoveItemClick(item)}>X</button></td>
                 </tr>
                 ))}
             </tbody>
         </table>
+        {selectedToDelete && (
+            <DeleteFromCart
+                id={selectedToDelete?.id}
+                title={selectedToDelete?.title}
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                onConfirm={handleRemoveOrder}
+            />
+        )}
     </div>
     );
 };

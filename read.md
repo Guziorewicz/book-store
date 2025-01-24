@@ -1,4 +1,4 @@
-Basic e-commerce app with login page, list of products and shopping cart. 
+Basic e-commerce app with list of products and shopping cart. 
 
 User data is simpled to one user.
 
@@ -10,7 +10,13 @@ Technologies:
     - Docker/Kuberenetes
 
 
+Usage dev version:
 
-todoooo 
-- fetch order poprawić na pobieranie danych o książkach na podstawie zawartości koszyka
-- dodać dodawanie i odejmowanie obiektów z koszyka 
+Backend - run in two separated terminals 
+1) open venv `source venv/bin/activate`
+2) run fastapi 
+2a) books `cd app` -> `uvicorn books.main:app --reload --port 8000`
+2b) cart `cd app` -> `uvicorn cart.main:app --reload --port 8001`
+
+Frontend - `npm start`
+

@@ -10,7 +10,7 @@ const HomePage = () => {
     const [loading, setLoading] = useState(true);
 
     // Order from cart
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState([{}]);
     const [loadingCart, setLoadingCart] = useState(true);
 
     // Init books 

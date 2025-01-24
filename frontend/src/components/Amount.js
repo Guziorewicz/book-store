@@ -26,7 +26,7 @@ const AddToCart = ({ id, title, stock, isOpen, onClose, onConfirm }) => {
         onRequestClose={onClose}
         contentLabel="Dodaj do koszyka"
         style={{
-            content: { width: '300px', margin: 'auto', textAlign: 'center' }
+            content: { width: '300px',height: '400px', margin: 'auto', textAlign: 'center' }
         }}
     >    
         <div>
