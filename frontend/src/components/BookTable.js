@@ -3,7 +3,7 @@ import AddToCart from './Amount'
 import { checkAmount } from '../api/books';
 import { addOrderToCart } from '../api/orders';
 
-const BookTable = ({books}) => {
+const BookTable = ({books, onReload}) => {
 
 
     const [selectedBook, setSelectedBook] = useState(null);
@@ -39,8 +39,9 @@ const BookTable = ({books}) => {
                             stock: amount,
                             price: selectedBook.price
                         }
+                        console.log(JSON.stringify(order));
                         addOrderToCart({order});
-                    
+                        // onReload({books: true, cart: true});
                     } catch (error) {
                         console.log("Error with adding to cart", error);
                     } 
@@ -54,13 +55,9 @@ const BookTable = ({books}) => {
             console.error("Something goes wrong, try again");
             return;
         }
-        console.log(selectedBook);
-        console.log(amount);
         
 
 
-        // Add api to backend with user_id
-        //console.log("Dodano do koszyka");
         handleCloseModal();
     }
 

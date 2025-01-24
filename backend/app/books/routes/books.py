@@ -26,10 +26,3 @@ def check_stock(id: int, amount: int):
     return {"Books reserved in stock"}
     
 
-# Get book by title
-@book_router.get("/{title}")
-def get_book(title:str):
-    book = next((b for b in books if b["title"] == title), None)
-    if not book:
-        return {"error": "Book not found"}
-    return book

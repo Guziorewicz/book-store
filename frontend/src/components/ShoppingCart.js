@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DeleteFromCart from './ItemDeletion';
 import { removeFromCart } from '../api/orders'
 
-const ShoppingCart = ({cart}) => {
+const ShoppingCart = ({cart, onReload}) => {
 
     const [selectedToDelete, setSelectedToDelete] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,6 +21,7 @@ const ShoppingCart = ({cart}) => {
         try {
             const itemToRemove = selectedToDelete;
             removeFromCart({itemToRemove});
+            // onReload({books: true, cart: true});
             console.log(`Removed ${selectedToDelete.title}`);
         } catch (error) {
             console.log("Error with removing", error);
