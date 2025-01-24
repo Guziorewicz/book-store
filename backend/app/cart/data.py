@@ -12,7 +12,12 @@ users = [
 carts = [
   {
     "user_id": 1,
-    "cart": []
+    "cart": [{"id": 1,
+              "title": "The Pragmatic Programmer",
+              "author": "Andrew Hunt",
+              "pages": 352,
+              "stock": 3,
+              "price": 45.99},]
   },
   {
     "user_id": 2,

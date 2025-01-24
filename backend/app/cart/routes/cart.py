@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+from typing import List
 from ..models import Cart, Book
 from ..data import users, carts
 
@@ -25,16 +26,19 @@ def update_cart(user_id: int, order: Book):
 
 # Delete from cart ---- do zrobienia na razie jest 422 nie przyjmuje tematu 
 # w funkcji brakuje usunięcia z listy huehueheueheueh
-@cart_router.delete("/{user_id}/remove")
+@cart_router.post("/{user_id}/remove")
 def remove_from_cart(user_id: int, item: Book):
     # Find cart
     user_cart = next((cart for cart in carts if cart["user_id"] == user_id), None)
-    print(user_cart)
+    if not user_cart:
+        raise HTTPException(status_code=404, detail="Cart not found")
     # Find position
-    item_to_delete = next((item for item in user_cart["cart"] if item["title"] == item.title and item["stock"] == item.stock), None)
-    print(item_to_delete)
-    if item_to_delete is None:
+    item_to_delete = next((item for item in user_cart["cart"] if item["title"] == item["title"] and item["stock"] == item["stock"]), None)
+    if not item_to_delete:
         raise HTTPException(status_code=404, detail="Position not found")
+    # Remove item
+    user_cart["cart"].remove(item_to_delete)
+
     return {"Position removed"}
 
 

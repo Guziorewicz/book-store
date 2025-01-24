@@ -6,7 +6,7 @@ books = [
       "pages": 352,
       "stock": 12,
       "price": 45.99,
-      "reservated": 0
+      "reservated": 3
     },
     {
       "id": 2,

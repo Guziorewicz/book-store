@@ -17,10 +17,11 @@ const ShoppingCart = ({cart}) => {
         setIsModalOpen(false);
     }
     
-    const handleRemoveOrder = (item) => {
+    const handleRemoveOrder = () => {
         try {
-            removeFromCart(item);
-            console.log(`Removed ${item.name}`);
+            const itemToRemove = selectedToDelete;
+            removeFromCart({itemToRemove});
+            console.log(`Removed ${selectedToDelete.title}`);
         } catch (error) {
             console.log("Error with removing", error);
         }
