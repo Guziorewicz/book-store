@@ -59,6 +59,10 @@ resource "docker_container" "fastapi_books_container" {
     internal = 8000
     external = var.app_books_port
   }
+  volumes {
+    host_path      = abspath("${path.module}/../backend/app/books")
+    container_path = "/app"
+  }
   env = [
     "MONGO_URI=mongodb://mongo:27017"
   ]
@@ -90,6 +94,10 @@ resource "docker_container" "fastapi_cart_container" {
   ports {
     internal = 8000
     external = var.app_cart_port
+  }
+  volumes {
+    host_path      = abspath("${path.module}/../backend/app/cart")
+    container_path = "/app"
   }
   env = [
     "MONGO_URI=mongodb://mongo:27017"

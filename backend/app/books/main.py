@@ -25,6 +25,6 @@ app.include_router(book_router, prefix="/books", tags=["Books"])
 # Test route
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to the bookstore API!"}
+    return {"message": "Welcome to the bookstore here in the API!"}
 
 

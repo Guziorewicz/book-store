@@ -1,6 +1,5 @@
 from fastapi import APIRouter
 from models import Book
-# from data import books
 
 book_router = APIRouter()
 
