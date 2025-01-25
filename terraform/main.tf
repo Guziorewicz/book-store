@@ -17,26 +17,26 @@ resource "docker_network" "app_network" {
 
 # Image MongoDB
 resource "docker_image" "mongo_image" {
-  name         = "mongo:6.0"
+  name         = "mongo:6.0.book_store"
   keep_locally = false
 }
 
 # Container MongoDB
 resource "docker_container" "mongo_container" {
-  name  = "mongo"
+  name  = "mongo_book_shop"
   image = docker_image.mongo_image.name
   ports {
     internal = 27017
     external = var.mongo_port
   }
   volumes {
-    host_path = "${path.module}/../db/init-scripts"
+    host_path = abspath("${path.module}/../db/init-scripts")
     container_path = "/docker-entrypoint-initdb.d"
   }
-  env {
-    "MONGO_INITDB_ROOT_USERNAME" = "root"
-    "MONGO_INITDB_ROOT_PASSWORD" = "p@sswort"
-  }
+  env = [
+    "MONGO_INITDB_ROOT_USERNAME=root",
+    "MONGO_INITDB_ROOT_PASSWORD=p@sswort"
+  ]
   networks_advanced {
     name = docker_network.app_network.name
   }
@@ -54,7 +54,7 @@ resource "docker_image" "fastapi_books_image" {
 # Container FastAPI - Books
 resource "docker_container" "fastapi_books_container" {
   name  = "fastapi-books"
-  image = docker_image.fastapi_image.name
+  image = docker_image.fastapi_books_image.name
   ports {
     internal = 8000
     external = var.app_books_port
@@ -79,7 +79,7 @@ resource "docker_image" "fastapi_cart_image" {
 # Container FastAPI - Cart
 resource "docker_container" "fastapi_cart_container" {
   name  = "fastapi-cart"
-  image = docker_image.fastapi_image.name
+  image = docker_image.fastapi_cart_image.name
   ports {
     internal = 8000
     external = var.app_cart_port
