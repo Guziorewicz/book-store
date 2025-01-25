@@ -26,5 +26,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-
+# Notes
 todo.txt
+
+# Terraform 
+terraform/.terraform/*
+
+terraform/.terraform.lock.hcl
+
+terraform/terraform*
