@@ -1,10 +1,12 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pymongo import MongoClient
 from routes.cart import cart_router
 
 '''
-This is backend used to operate books data
-Hosted via `uvicorn cart.main:app --reload --port 8001`
+This is backend used to operate cart data in Mongo
+Hosted on Docker contaner on localhost:8009
 '''
 
 app = FastAPI()
@@ -17,6 +19,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Mongodb connection
+mongo_uri = os.getenv("MONGO_URI", "mongodb://localhost:27017")
+client = MongoClient(mongo_uri)
+db = client["carts"]
 
 # Register cart router
 app.include_router(cart_router, prefix="/cart", tags=["Cart"])

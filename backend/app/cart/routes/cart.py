@@ -1,18 +1,41 @@
-from fastapi import APIRouter, HTTPException
+from bson.objectid import ObjectId
+from fastapi import APIRouter, HTTPException, Depends
+from pymongo.database import Database
 from typing import List
 from models import Cart, Book
-# from data import users, carts
 
 cart_router = APIRouter()
 
+# Get global db
+def get_db() -> Database:
+    from main import db
+    return db
 
-# Find cart or create new
-@cart_router.get("/{user_id}")
-def get_cart(user_id: int):
-    user_cart = next((cart for cart in carts if cart["user_id"] == user_id), None)
+# Convertion model to JSON
+def serialize_cart(cart):
+    return {
+        "user_id": cart["user_id"],
+        "cart": [
+            {
+                "id": item["id"],
+                "title": item["title"],
+                "author": item["author"],
+                "pages": item["pages"],
+                "stock": item["stock"],
+                "price": item["price"],
+            }
+            for item in cart["cart"]
+        ],
+    }
+
+# Get user cart
+@cart_router.get("/{user_id}", response_model=Cart)
+def get_user_cart(user_id: int, db: Database = Depends(get_db)):
+    user_cart = db.carts.find_one({"user_id": user_id})
     if user_cart is None:
         raise HTTPException(status_code=404, detail="User not found")
-    return user_cart
+    return serialize_cart(user_cart)
+
 
 # Add order to cart
 @cart_router.post("/{user_id}/add")

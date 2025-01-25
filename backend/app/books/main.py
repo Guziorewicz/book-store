@@ -6,7 +6,7 @@ from routes.books import book_router
 
 '''
 This is backend used to operate books data in Mongo
-Hosted on 8007
+Hosted on Docker contaner on localhost:8007
 '''
 
 app = FastAPI()

@@ -18,6 +18,7 @@ const HomePage = () => {
     const getBooks = async () => {
         try {
             const data = await fetchBooks();
+            console.log(JSON.stringify(data));
             setBooks(data);
         } catch (error) {
             console.error('Error fetching books:', error);
@@ -80,7 +81,7 @@ const HomePage = () => {
             </div>
             <div>
                 <h2>Twoje zamówienie</h2>
-                {/* <ShoppingCart cart={cart} onReload={onReload} /> */}
+                <ShoppingCart cart={cart} onReload={onReload} />
             </div>
         </div>
     );
