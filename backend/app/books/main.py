@@ -1,10 +1,12 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pymongo import MongoClient
 from routes.books import book_router
 
 '''
-This is backend used to operate books data
-Hosted via `uvicorn books.main:app --reload --port 8000`
+This is backend used to operate books data in Mongo
+Hosted on 8007
 '''
 
 app = FastAPI()
@@ -17,6 +19,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Mongodb connection
+mongo_uri = os.getenv("MONGO_URI", "mongodb://localhost:27017")
+client = MongoClient(mongo_uri)
+db = client["books"]
 
 # Register book router
 

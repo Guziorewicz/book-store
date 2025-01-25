@@ -7,7 +7,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-ENV MONGO_URI=mongodb://root:p@sswort@mongo_book_shop:27017/admin
+ENV MONGO_URI=mongodb://root:paSUTwort@mongo_book_shop:27017/admin
 
 
 # Before start, wait for mongo

@@ -1,12 +1,37 @@
-from fastapi import APIRouter
+from bson.objectid import ObjectId
+from fastapi import APIRouter, Depends
+from pymongo.database import Database
 from models import Book
 
 book_router = APIRouter()
 
+
+# Get global db
+def get_db() -> Database:
+    from main import db
+    return db
+
+
+# Convert MongoDB docs to JSON
+def serialize_book(book):
+    return {
+        "id": str(book["_id"]),
+        "title": book["title"],
+        "author": book["author"],
+        "pages": book["pages"],
+        "stock": book["stock"],
+        "price": book["price"],
+    }
+
 # Get all books
 @book_router.get("/")
-def get_books():
-    return books
+def get_books(db: Database = Depends(get_db)):
+    # Get books
+    books = db.books.find()
+    # Serialize each book
+    return [serialize_book(book) for book in books]
+
+
 
 
 # Check book in stock and make reservation

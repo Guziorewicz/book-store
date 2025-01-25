@@ -43,7 +43,7 @@ const HomePage = () => {
     // Init
     useEffect(() => {
         getBooks();
-        getCart();
+        // getCart();
     }, []);
 
 
@@ -80,7 +80,7 @@ const HomePage = () => {
             </div>
             <div>
                 <h2>Twoje zamówienie</h2>
-                <ShoppingCart cart={cart} onReload={onReload} />
+                {/* <ShoppingCart cart={cart} onReload={onReload} /> */}
             </div>
         </div>
     );

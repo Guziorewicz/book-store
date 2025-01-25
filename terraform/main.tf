@@ -35,7 +35,7 @@ resource "docker_container" "mongo_container" {
   }
   env = [
     "MONGO_INITDB_ROOT_USERNAME=root",
-    "MONGO_INITDB_ROOT_PASSWORD=p@sswort"
+    "MONGO_INITDB_ROOT_PASSWORD=paSUTwort"
   ]
   networks_advanced {
     name = docker_network.app_network.name
@@ -64,7 +64,7 @@ resource "docker_container" "fastapi_books_container" {
     container_path = "/app"
   }
   env = [
-    "MONGO_URI=mongodb://mongo:27017"
+    "MONGO_URI=mongodb://root:paSUTwort@mongo_book_shop:27017/admin"
   ]
   networks_advanced {
     name = docker_network.app_network.name
@@ -100,7 +100,7 @@ resource "docker_container" "fastapi_cart_container" {
     container_path = "/app"
   }
   env = [
-    "MONGO_URI=mongodb://mongo:27017"
+    "MONGO_URI=mongodb://root:paSUTwort@mongo_book_shop:27017/admin"
   ]
   networks_advanced {
     name = docker_network.app_network.name
