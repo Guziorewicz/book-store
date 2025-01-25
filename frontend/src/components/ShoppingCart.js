@@ -36,7 +36,6 @@ const ShoppingCart = ({cart, onReload}) => {
                 <tr>
                     <th>Title</th>
                     <th>Author</th>
-                    <th>Pages</th>
                     <th>Stock</th>
                     <th>Unit Price</th>
                     <th>Action</th>
@@ -47,7 +46,6 @@ const ShoppingCart = ({cart, onReload}) => {
                     <tr key={item.id}>
                     <td>{item.title}</td>
                     <td>{item.author}</td>
-                    <td>{item.pages}</td>
                     <td>{item.stock}</td>
                     <td>{item.price.toFixed(2)} EUR</td>
                     <td><button onClick={() => handleRemoveItemClick(item)}>X</button></td>

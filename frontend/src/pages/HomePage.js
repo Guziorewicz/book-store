@@ -18,7 +18,6 @@ const HomePage = () => {
     const getBooks = async () => {
         try {
             const data = await fetchBooks();
-            console.log(JSON.stringify(data));
             setBooks(data);
         } catch (error) {
             console.error('Error fetching books:', error);
@@ -44,7 +43,7 @@ const HomePage = () => {
     // Init
     useEffect(() => {
         getBooks();
-        // getCart();
+        getCart();
     }, []);
 
 

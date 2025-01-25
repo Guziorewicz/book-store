@@ -9,3 +9,6 @@ class Book(BaseModel):
     price: float
     reservated: int
 
+class CheckReserveRequest(BaseModel):
+    book_id: int
+    amount: int
