@@ -1,16 +1,15 @@
-Basic e-commerce app with list of products and shopping cart. 
+# Basic e-commerce app with list of products and shopping cart. 
 
-User data is simpled to one user.
+# User data is simpled to one user.
 
-App works as SPA. 
 
-Technologies:
+# Technologies:
     - React, React-Modal React-Router-Dom, Axios, Mui
     - FastAPI, Uvicorn, Fastapi-cors
     - Docker/Kuberenetes
 
 
-Usage dev version:
+# Usage dev version:
 
 Backend - run in two separated terminals 
 1) open venv `source venv/bin/activate`
@@ -20,3 +19,4 @@ Backend - run in two separated terminals
 
 Frontend - `npm start`
 
+# New feature - Terraform + Mongodb
