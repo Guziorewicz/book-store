@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routes.books import book_router
+from routes.books import book_router
 
 '''
 This is backend used to operate books data

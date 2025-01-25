@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routes.cart import cart_router
+from routes.cart import cart_router
 
 '''
 This is backend used to operate books data

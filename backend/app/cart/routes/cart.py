@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from typing import List
-from ..models import Cart, Book
-from ..data import users, carts
+from models import Cart, Book
+# from data import users, carts
 
 cart_router = APIRouter()
 

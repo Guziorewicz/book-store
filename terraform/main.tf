@@ -17,7 +17,7 @@ resource "docker_network" "app_network" {
 
 # Image MongoDB
 resource "docker_image" "mongo_image" {
-  name         = "mongo:6.0.book_store"
+  name         = "mongo:6.0"
   keep_locally = false
 }
 
@@ -65,6 +65,13 @@ resource "docker_container" "fastapi_books_container" {
   networks_advanced {
     name = docker_network.app_network.name
   }
+
+  healthcheck {
+    test     = ["CMD", "curl", "-f", "http://localhost:8007"]
+    interval = "30s"
+    timeout  = "10s"
+    retries  = 3
+  }
 }
 
 # Image FastAPI - Cart
@@ -89,5 +96,12 @@ resource "docker_container" "fastapi_cart_container" {
   ]
   networks_advanced {
     name = docker_network.app_network.name
+  }
+
+  healthcheck {
+    test     = ["CMD", "curl", "-f", "http://localhost:8009"]
+    interval = "30s"
+    timeout  = "10s"
+    retries  = 3
   }
 }
