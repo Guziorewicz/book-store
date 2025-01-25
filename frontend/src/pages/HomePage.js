@@ -10,7 +10,7 @@ const HomePage = () => {
     const [loadingBooks, setLoadingBooks] = useState(true);
 
     // Order from cart
-    const [cart, setCart] = useState([{}]);
+    const [cart, setCart] = useState([]);
     const [loadingCart, setLoadingCart] = useState(true);
 
 
@@ -25,7 +25,6 @@ const HomePage = () => {
             setLoadingBooks(false);
         }
     };
-
 
 
     // Get cart 
@@ -47,22 +46,6 @@ const HomePage = () => {
     }, []);
 
 
-    // Reloading tables
-    const onReload = async ({books = false, cart = false} = {}) => {
-        console.log("reloadm");
-        console.log("b");
-        console.log(books);
-        console.log("c");
-        console.log(cart);
-        if (books) {
-            await getBooks();
-        }
-        if (cart) {
-            await getCart();
-        }
-    }
-
-
     if (loadingBooks) {
         return <p>Ładowanie danych...</p>
     }
@@ -76,11 +59,11 @@ const HomePage = () => {
         <div>
             <div>
                 <h1>Lista książek</h1>
-                <BookTable books={books} onReload={onReload} />
+                <BookTable books={books} setCart={setCart} setBooks={setBooks}  />
             </div>
             <div>
                 <h2>Twoje zamówienie</h2>
-                <ShoppingCart cart={cart} onReload={onReload} />
+                <ShoppingCart cart={cart} setCart={setCart} setBooks={setBooks} books={books}  />
             </div>
         </div>
     );

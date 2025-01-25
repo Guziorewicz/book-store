@@ -114,7 +114,10 @@ async def remove_order_from_cart(user_id: int, item_to_remove: dict, db: Databas
         {"$pull": {"cart": {"id": item_to_remove["id"]}}}
     )
 
-    return {"status": "OK", "message": "Book removed from cart"}
+    # Return updated cart
+    updated_cart = db.carts.find_one({"user_id": user_id})
+
+    return {"status": "OK", "message": "Book removed from cart", "cart": updated_cart["cart"]}
 
 # # Add order to cart
 # @cart_router.post("/{user_id}/add")

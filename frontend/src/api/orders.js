@@ -23,6 +23,7 @@ export const addOrderToCart = async ({order}) => {
             },
         });
         console.log("Response from server: ", response.data);
+        return response.data;
     } catch (error) {
         console.error('Error fetching cart', error);
         throw error;
@@ -37,8 +38,10 @@ export const removeFromCart = async ({itemToRemove}) => {
             },
         });
         console.log("Response from server: ", response.data);
+        return response.data;
     } catch (error) {
         console.error('Error removing', error);
         throw error;
     }
+
 }

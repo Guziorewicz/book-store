@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import AddToCart from './Amount'
-import { checkAmount } from '../api/books';
 import { addOrderToCart } from '../api/orders';
 
-const BookTable = ({books, onReload}) => {
+const BookTable = ({books, setCart, setBooks}) => {
 
 
     const [selectedBook, setSelectedBook] = useState(null);
@@ -19,43 +18,36 @@ const BookTable = ({books, onReload}) => {
         setIsModalOpen(false);
     }
 
-    const handleConfirmAdd = (id, amount) => {
+    const handleConfirmAdd = async (id, amount) => {
         
         // Take book position with amount 
         if(selectedBook.id === id) {
-            // Check if amount of books is avaliable books-api
             try {
-                checkAmount(id, amount);
-                // Remember to get books from stock
-
-                        // If 200 then add books data to cart via orders-api
-                    try {
-                        // Prepare to send
-                        const order = {
-                            id: selectedBook.id,
-                            title: selectedBook.title,
-                            author: selectedBook.author,
-                            pages: selectedBook.pages,
-                            stock: amount,
-                            price: selectedBook.price
-                        }
-                        console.log(JSON.stringify(order));
-                        addOrderToCart({order});
-                        // onReload({books: true, cart: true});
-                    } catch (error) {
-                        console.log("Error with adding to cart", error);
-                    } 
-                    // Confirm order and get reservation from stock
-                
+                // Prepare to send
+                const order = {
+                    id: selectedBook.id,
+                    title: selectedBook.title,
+                    author: selectedBook.author,
+                    stock: amount,
+                    price: selectedBook.price
+                }
+                const response = await addOrderToCart({order});
+                setCart(response);
             } catch (error) {
-                console.log("Not on stock", error);
+                console.log("Error with adding to cart", error);
             } 
-            
+            // Remove from page stock 
+            const updatedBooks = books.map((book) => {
+                if (book.id === id) {
+                    return { ...book, stock: book.stock - amount };
+                }
+                return book;
+            });
+            setBooks(updatedBooks);
         } else {
             console.error("Something goes wrong, try again");
             return;
         }
-        
 
 
         handleCloseModal();

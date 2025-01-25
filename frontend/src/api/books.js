@@ -11,15 +11,3 @@ export const fetchBooks = async () => {
         throw error;
     }
 }
-
-export const checkAmount = async (id, amount) => {
-    try {
-        const response = await axios.get(API_URL + 'books/state', {
-            params: {id, amount}
-        });
-        return response.data;
-    } catch (error) {
-        console.error('Error from warehouse', error)
-        throw error;
-    }
-}

@@ -4,19 +4,19 @@
 
 
 # Technologies:
-    - React, React-Modal React-Router-Dom, Axios, Mui
-    - FastAPI, Uvicorn, Fastapi-cors
-    - Docker/Kuberenetes
+    - React
+    - FastAPI
+    - MongoDB
+    - Docker/Terraform
 
 
 # Usage dev version:
 
-Backend - run in two separated terminals 
-1) open venv `source venv/bin/activate`
-2) run fastapi 
-2a) books `cd app` -> `uvicorn books.main:app --reload --port 8000`
-2b) cart `cd app` -> `uvicorn cart.main:app --reload --port 8001`
+Backend - move to ./terraform
+`terraform init`
+`terraform plan`
+`terraform apply`
+Terraform should create and run two FastAPI containers and MongoDB container, connected in Docker Network
 
 Frontend - `npm start`
 
-# New feature - Terraform + Mongodb

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DeleteFromCart from './ItemDeletion';
 import { removeFromCart } from '../api/orders'
 
-const ShoppingCart = ({cart, onReload}) => {
+const ShoppingCart = ({cart, setCart, setBooks, books}) => {
 
     const [selectedToDelete, setSelectedToDelete] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,12 +17,20 @@ const ShoppingCart = ({cart, onReload}) => {
         setIsModalOpen(false);
     }
     
-    const handleRemoveOrder = () => {
+    const handleRemoveOrder = async () => {
         try {
             const itemToRemove = selectedToDelete;
-            removeFromCart({itemToRemove});
-            // onReload({books: true, cart: true});
+            const response = await removeFromCart({ itemToRemove });
+            setCart(response);
             console.log(`Removed ${selectedToDelete.title}`);
+            // Remove from page stock 
+            const updatedBooks = books.map((book) => {
+                if (book.id === selectedToDelete.id) {
+                    return { ...book, stock: book.stock + selectedToDelete.stock };
+                }
+                return book;
+            });
+            setBooks(updatedBooks);
         } catch (error) {
             console.log("Error with removing", error);
         }
