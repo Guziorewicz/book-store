@@ -65,27 +65,27 @@ Terraform will:
 
 ### Project Structure
 
-shopping-cart/
-│
-├── backend/
-│   ├── app/
-│   │   ├── books/     # Books Backend Service
-│   │   ├── cart/      # Cart Backend Service
-│   │   └── shared/    # Shared models or utilities (if needed)
-│
-├── frontend/          # React + Vite Frontend
-│   ├── src/           # Source code with React components
-│   ├── public/        # Static assets
-│   ├── tailwind.config.js  # Tailwind configuration
-│   └── index.css      # Tailwind base styles
-│
-├── terraform/         # Terraform configuration files
-│   ├── main.tf        # Terraform configuration for Docker containers
-│   ├── variables.tf   # Input variables
-│   ├── outputs.tf     # Outputs (URLs, etc.)
-│
-└── db/
-    └── init-scripts/  # MongoDB initialization scripts
+ shopping-cart/
+ │
+ ├── backend/
+ │   ├── app/
+ │   │   ├── books/     # Books Backend Service
+ │   │   ├── cart/      # Cart Backend Service
+ │   │   └── shared/    # Shared models or utilities (if needed)
+ │
+ ├── frontend/          # React + Vite Frontend
+ │   ├── src/           # Source code with React components
+ │   ├── public/        # Static assets
+ │   ├── tailwind.config.js  # Tailwind configuration
+ │   └── index.css      # Tailwind base styles
+ │
+ ├── terraform/         # Terraform configuration files
+ │   ├── main.tf        # Terraform configuration for Docker containers
+ │   ├── variables.tf   # Input variables
+ │    ├── outputs.tf     # Outputs (URLs, etc.)
+ │
+ └── db/
+     └── init-scripts/  # MongoDB initialization scripts
 
 ### Highlights of the Architecture
 
