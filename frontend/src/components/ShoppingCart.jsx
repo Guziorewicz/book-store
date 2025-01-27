@@ -7,6 +7,8 @@ const ShoppingCart = ({cart, setCart, setBooks, books}) => {
     const [selectedToDelete, setSelectedToDelete] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const [delivery, setDelivery] = useState(false);
+
     const handleRemoveItemClick = (item) => {
         setSelectedToDelete(item);
         setIsModalOpen(true);
@@ -36,6 +38,10 @@ const ShoppingCart = ({cart, setCart, setBooks, books}) => {
         }
     }
 
+    const handleDelivery = () => {
+        const el = delivery;
+        setDelivery(!el);
+    }
 
     return (
     <div className="overflow-x-auto bg-white shadow-md rounded-lg mt-6">    
@@ -74,6 +80,21 @@ const ShoppingCart = ({cart, setCart, setBooks, books}) => {
                 onConfirm={handleRemoveOrder}
             />
         )}
+        <div className="bg-green-600 text-white border-collapse p-2 flex justify-between items-center">
+            <p className="text-white text-center">
+            Summary:  {cart.cart.reduce((total, element) => total + element.stock * element.price, 0).toFixed(2)} €
+            </p>
+            <div className="bg-green-600 text-center border-collapse">
+                <button className="bg-white text-green-600 px-4 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-150"
+                    onClick={handleDelivery}
+                >
+                    Make order
+                </button>
+            </div>
+        </div>
+            {
+                delivery && <p className="text-white text-center bg-green-600">UPCOMING</p>
+            }
     </div>
     );
 };
