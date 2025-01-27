@@ -47,23 +47,25 @@ const HomePage = () => {
 
 
     if (loadingBooks) {
-        return <p>Loading data...</p>
+        return <p className="text-primary text-center mt-4">Loading data...</p>
     }
 
 
     if (loadingCart) {
-        return <p>Loading order...</p>
+        return <p className="text-primary text-center mt-4">Loading order...</p>
     }
 
     return(
-        <div>
-            <div>
-                <h1 className="text-6xl font-bold underline">Books list</h1>
-                <BookTable books={books} setCart={setCart} setBooks={setBooks}  />
-            </div>
-            <div>
-                <h2>Your order</h2>
-                <ShoppingCart cart={cart} setCart={setCart} setBooks={setBooks} books={books}  />
+        <div className="bg-gray-100 min-h-screen p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h1 className="text-4xl font-extrabold text-primary mb-6 font-serif">Books list</h1>
+                    <BookTable books={books} setCart={setCart} setBooks={setBooks}  />
+                </div>
+                <div>
+                    <h2 className="text-3xl font-semibold text-primary mb-6 font-sans italic">Your order</h2>
+                    <ShoppingCart cart={cart} setCart={setCart} setBooks={setBooks} books={books}  />
+                </div>
             </div>
         </div>
     );

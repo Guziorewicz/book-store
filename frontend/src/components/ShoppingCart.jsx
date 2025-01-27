@@ -38,25 +38,29 @@ const ShoppingCart = ({cart, setCart, setBooks, books}) => {
 
 
     return (
-    <div>    
-        <table>
+    <div className="overflow-x-auto bg-white shadow-md rounded-lg mt-6">    
+        <table className="table-auto w-full border-collapse">
             <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Stock</th>
-                    <th>Unit Price</th>
-                    <th>Action</th>
+                <tr className="bg-green-600 text-white">
+                    <th className="px-4 py-2 text-left font-semibold">Title</th>
+                    <th className="px-4 py-2 text-left font-semibold">Author</th>
+                    <th className="px-4 py-2 text-center font-semibold">Amount</th>
+                    <th className="px-4 py-2 text-right font-semibold">Unit Price</th>
+                    <th className="px-4 py-2 text-center font-semibold">Action</th>
                 </tr>
             </thead>
             <tbody>
                 {cart.cart.map((item) => (
-                    <tr key={item.id}>
-                    <td>{item.title}</td>
-                    <td>{item.author}</td>
-                    <td>{item.stock}</td>
-                    <td>{item.price.toFixed(2)} EUR</td>
-                    <td><button onClick={() => handleRemoveItemClick(item)}>X</button></td>
+                    <tr key={item.id} className="border-t hover:bg-green-100 transition duration-150">
+                    <td className="px-4 py-2">{item.title}</td>
+                    <td className="px-4 py-2">{item.author}</td>
+                    <td className="px-4 py-2">{item.stock}</td>
+                    <td className="px-4 py-2 text-right">{item.price.toFixed(2)} €</td>
+                    <td className="px-4 py-2 text-center">
+                        <button 
+                        onClick={() => handleRemoveItemClick(item)}
+                        className="text-red px-4 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-150"
+                        >❌</button></td>
                 </tr>
                 ))}
             </tbody>

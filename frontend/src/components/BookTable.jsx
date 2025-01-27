@@ -55,27 +55,37 @@ const BookTable = ({books, setCart, setBooks}) => {
 
 
     return (
-    <div>    
-        <table>
+    <div className="overflow-x-auto bg-white shadow-md rounded-lg">    
+        <table className="table-auto w-full border-collapse">
             <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Pages</th>
-                    <th>Stock</th>
-                    <th>Price</th>
-                    <th>Action</th>
+                <tr className="bg-green-600 text-white">
+                    <th className="px-4 py-3 text-left font-semibold">Title</th>
+                    <th className="px-4 py-3 text-left font-semibold">Author</th>
+                    <th className="px-4 py-3 text-center font-semibold">Pages</th>
+                    <th className="px-4 py-3 text-center font-semibold">Stock</th>
+                    <th className="px-4 py-3 text-right font-semibold">Price</th>
+                    <th className="px-4 py-3 text-center font-semibold">Action</th>
                 </tr>
             </thead>
             <tbody>
                 {books.map((book) => (
-                    <tr key={book.id}>
-                    <td>{book.title}</td>
-                    <td>{book.author}</td>
-                    <td>{book.pages}</td>
-                    <td>{book.stock}</td>
-                    <td>{book.price.toFixed(2)} EUR</td>
-                    <td><button onClick={() => handleAddToCartClick(book)}>🛒</button></td>
+                    <tr key={book.id} className="border-t hover:bg-green-100 transition duration-150">
+                    <td className="px-4 py-3">{book.title}</td>
+                    <td className="px-4 py-3">{book.author}</td>
+                    <td className="px-4 py-3 text-center">{book.pages}</td>
+                    <td
+                      className={`px-4 py-3 text-center ${
+                        book.stock > 0
+                          ? "text-green-600 font-medium"
+                          : "text-red-500 font-medium"
+                      }`}
+                    >
+                        {book.stock}</td>
+                    <td className="px-4 py-3 text-right">{book.price.toFixed(2)} €</td>
+                    <td className="px-4 py-3 text-center">
+                        <button 
+                             className="text-white px-4 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-150"
+                            onClick={() => handleAddToCartClick(book)}>🛒</button></td>
                 </tr>
                 ))}
             </tbody>
