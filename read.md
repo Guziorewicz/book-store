@@ -13,15 +13,18 @@
 # Usage dev version:
 
 Dependencies:
-node, npm, Docker, Terraform
+Docker, Terraform
 
-Backend - move to ./terraform
+./terraform
 `terraform init`
 `terraform plan`
 `terraform apply`
-Terraform should create and run two FastAPI containers and MongoDB container, connected in Docker Network
+Terraform should create and run two FastAPI containers, Vite container and MongoDB container, connected in Docker Network
 
-Frontend - 
-`npm install`
-`npm run dev`
+# Dev usage 
+external links
+Front Page - http://localhost:5555
+Books Backend Swagger - http://localhost:8007/docs
+Cart Backend Swagger - http://localhost:8009/docs
 
+MongoDB cli - `docker exec -it mongo_book_shop mongosh -u root -p paSUTwort --authenticahenticationDatabase admin`
