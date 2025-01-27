@@ -13,6 +13,11 @@ variable "app_cart_port" {
   default = 8009
 }
 
+variable "app_front" {
+  description = "External port for Frontend"
+  default = 5555
+}
+
 variable "network_name" {
   description = "Docker network name"
   default = "book_store_network"

@@ -113,3 +113,29 @@ resource "docker_container" "fastapi_cart_container" {
     retries  = 3
   }
 }
+
+# Image Front Vite
+resource "docker_image" "vite_image" {
+  name = "vite_react_app"
+  build {
+        path       = "${path.module}/../frontend"
+        dockerfile = "Dockerfile"
+  }
+}
+
+# Container Vite
+resource "docker_container" "vite_container" {
+  name = "front-store"
+  image = docker_image.vite_image.name
+  ports {
+    internal = 5173
+    external = var.app_front
+  }
+  networks_advanced {
+    name = docker_network.app_network.name
+  }
+  volumes {
+    host_path      = abspath("${path.module}/../frontend")
+    container_path = "/app"
+  }
+}

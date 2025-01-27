@@ -9,6 +9,16 @@ export default defineConfig({
     tailwindcss(),
   ],
   server: {
-    port: 5555,
-  },  
+    proxy: {
+      '/books-api': {
+        target: 'http://fastapi-books:8000', 
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/books-api/, ''),
+      },
+      '/cart-api': {
+        target: 'http://fastapi-cart:8000', 
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/cart-api/, ''), 
+      },
+  }}
 })

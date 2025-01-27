@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8009/';
+const CART_API_URL = '/cart-api/';
 const user_id = 1; // for latest user base
 
 
 export const fetchOrder = async () => {
     try {
-        const response = await axios.get(API_URL + 'cart/' + user_id);
+        const response = await axios.get(CART_API_URL + 'cart/' + user_id);
         //console.log(response.data);
         return response.data;
     } catch (error) {
@@ -17,7 +17,7 @@ export const fetchOrder = async () => {
 
 export const addOrderToCart = async ({order}) => {
     try {
-        const response = await axios.post(API_URL + 'cart/' + user_id + '/add', order, {
+        const response = await axios.post(CART_API_URL + 'cart/' + user_id + '/add', order, {
             headers:{
                 'Content-Type': 'application/json',
             },
@@ -32,7 +32,7 @@ export const addOrderToCart = async ({order}) => {
 
 export const removeFromCart = async ({itemToRemove}) => {
     try {
-        const response = await axios.post(API_URL + 'cart/' + user_id + '/remove', itemToRemove, {
+        const response = await axios.post(CART_API_URL + 'cart/' + user_id + '/remove', itemToRemove, {
             headers:{
                 'Content-Type': 'application/json',
             },
