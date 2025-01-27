@@ -47,22 +47,22 @@ const HomePage = () => {
 
 
     if (loadingBooks) {
-        return <p>Ładowanie danych...</p>
+        return <p>Loading data...</p>
     }
 
 
     if (loadingCart) {
-        return <p>Ładowanie zamówienia...</p>
+        return <p>Loading order...</p>
     }
 
     return(
         <div>
             <div>
-                <h1>Lista książek</h1>
+                <h1 className="text-6xl font-bold underline">Books list</h1>
                 <BookTable books={books} setCart={setCart} setBooks={setBooks}  />
             </div>
             <div>
-                <h2>Twoje zamówienie</h2>
+                <h2>Your order</h2>
                 <ShoppingCart cart={cart} setCart={setCart} setBooks={setBooks} books={books}  />
             </div>
         </div>

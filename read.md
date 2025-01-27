@@ -4,7 +4,7 @@
 
 
 # Technologies:
-    - React
+    - React (with Tailwind)
     - FastAPI
     - MongoDB
     - Docker/Terraform
