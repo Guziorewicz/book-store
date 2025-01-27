@@ -57,11 +57,14 @@ Terraform will:
 ### Accessing the App
 
   Frontend (React): http://localhost:5555
+  
   Books Backend (FastAPI Swagger): http://localhost:8007/docs
+  
   Cart Backend (FastAPI Swagger): http://localhost:8009/docs
+  
   MongoDB CLI:
 
-  docker exec -it mongo_book_shop mongosh -u <user> -p <password> --authenticationDatabase admin
+  docker exec -it mongo_book_shop mongosh -u `user` -p `password` --authenticationDatabase admin
 
 ### Project Structure
 
