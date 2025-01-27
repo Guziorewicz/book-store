@@ -77,14 +77,15 @@ const BookTable = ({books, setCart, setBooks}) => {
                       className={`px-4 py-3 text-center ${
                         book.stock > 0
                           ? "text-green-600 font-medium"
-                          : "text-red-500 font-medium"
+                          : "text-red-500 font-medium opacity-50 cursor-not-allowed"
                       }`}
                     >
                         {book.stock}</td>
                     <td className="px-4 py-3 text-right">{book.price.toFixed(2)} €</td>
                     <td className="px-4 py-3 text-center">
                         <button 
-                             className="text-white px-4 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-150"
+                            className="text-white px-4 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-150"
+                            disabled={book.stock === 0}
                             onClick={() => handleAddToCartClick(book)}>🛒</button></td>
                 </tr>
                 ))}
