@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Modal from 'react-modal';
+
 
 const AddToCart = ({ id, title, stock, isOpen, onClose, onConfirm }) => {
 
 
     const [selectedAmount, setSelectedAmount] = useState(1);
 
-    const handleIncrease = () => {
+
+    const handleIncrease = useCallback(() => {
         setSelectedAmount(prev => Math.min(prev + 1, stock));
-    };
-
-    const handleDecrease = () => {
+    }, [stock]);
+    
+    const handleDecrease = useCallback(() => {
         setSelectedAmount(prev => Math.max(prev - 1, 1));
-    };
-
-    const handleConfirm = () => {
+    }, []);
+    
+    const handleConfirm = useCallback(() => {
         onConfirm(id, selectedAmount);
-        onClose(); 
-    };
-
+        onClose();
+    }, [id, selectedAmount, onConfirm, onClose]);
 
     return(
     <Modal
@@ -49,10 +50,8 @@ const AddToCart = ({ id, title, stock, isOpen, onClose, onConfirm }) => {
                     aria-label="Close Add to Cart Modal"
                 >X</button>
                 <h2 className="text-lg font-semibold mb-4">Chosed: {title}</h2>
+                <div className="text-lg font-semibold mb-4" id="stock-value" aria-live="polite"> {selectedAmount} item/s selected </div>
                 <div className="flex justify-center items-center gap-4 mb-6">
-                    <span id="stock-value" aria-live="polite" className="sr-only">
-                        {selectedAmount} items selected
-                    </span>
                     <div className="flex justify-center items-center gap-4 mb-6">
                         <button 
                             className="w-10 h-10 bg-green-600 text-white rounded-full hover:bg-green-700 transition" 

@@ -1,57 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import AddToCart from './Amount'
-import { addOrderToCart } from '../api/orders';
+import { useBooks } from "../context/BooksContext";
+import { useCart } from "../context/CartContext";
 
-const BookTable = ({books, setCart, setBooks}) => {
+const BookTable = () => {
 
+    const { books, setBooks  } = useBooks();
+    const { setCart, addToCart } = useCart();
 
     const [selectedBook, setSelectedBook] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleAddToCartClick = (book) => {
+
+    const sortedBooks = useMemo(() => {
+        return books.slice().sort((a, b) => a.title.localeCompare(b.title));
+    }, [books]);
+
+    const handleAddToCartClick = useCallback((book) => {
         setSelectedBook(book);
         setIsModalOpen(true);
-    }
+    }, []);
 
-    const handleCloseModal = () => {
+
+    const handleCloseModal = useCallback(() => {
         setSelectedBook(null);
         setIsModalOpen(false);
-    }
+    }, []);
 
-    const handleConfirmAdd = async (id, amount) => {
-        
-        // Take book position with amount 
-        if(selectedBook.id === id) {
+
+    const handleConfirmAdd = useCallback(async (id, amount) => {
+        if (selectedBook.id === id) {
             try {
-                // Prepare to send
                 const order = {
                     id: selectedBook.id,
                     title: selectedBook.title,
                     author: selectedBook.author,
                     stock: amount,
                     price: selectedBook.price
-                }
-                const response = await addOrderToCart({order});
-                setCart(response);
+                };
+                await addToCart(order);
             } catch (error) {
                 console.log("Error with adding to cart", error);
-            } 
-            // Remove from page stock 
-            const updatedBooks = books.map((book) => {
-                if (book.id === id) {
-                    return { ...book, stock: book.stock - amount };
-                }
-                return book;
-            });
-            setBooks(updatedBooks);
-        } else {
-            console.error("Something goes wrong, try again");
-            return;
+            }
+            
+            setBooks((prevBooks) =>
+                prevBooks.map((book) =>
+                    book.id === id ? { ...book, stock: book.stock - amount } : book
+                )
+            );
         }
-
-
         handleCloseModal();
-    }
+    }, [selectedBook, addToCart, setCart, setBooks]);
 
 
     return (
@@ -68,7 +67,7 @@ const BookTable = ({books, setCart, setBooks}) => {
                 </tr>
             </thead>
             <tbody>
-                {books.map((book) => (
+                {sortedBooks.map((book) => (
                     <tr key={book.id} className="border-t hover:bg-green-100 transition duration-150">
                     <td className="px-4 py-3">{book.title}</td>
                     <td className="px-4 py-3">{book.author}</td>
@@ -88,6 +87,7 @@ const BookTable = ({books, setCart, setBooks}) => {
                             disabled={book.stock === 0}
                             aria-disabled={book.stock === 0}
                             onClick={() => handleAddToCartClick(book)}
+                            // onClick={handleAddToCartClick}
                             aria-label={`Add ${book.title} to Cart`}
                             role="button"
                         >🛒</button></td>
