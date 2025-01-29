@@ -9,6 +9,8 @@ export default defineConfig({
     tailwindcss(),
   ],
   server: {
+    // host: true,
+    // port: 5555,
     proxy: {
       '/books-api': {
         target: 'http://fastapi-books:8000', 

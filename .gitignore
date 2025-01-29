@@ -35,3 +35,9 @@ terraform/.terraform/*
 terraform/.terraform.lock.hcl
 
 terraform/terraform*
+
+
+# Testing
+_global_testing/*
+
+frontend/.lighthouseci/*

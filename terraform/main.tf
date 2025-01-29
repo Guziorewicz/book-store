@@ -18,7 +18,6 @@ resource "docker_network" "app_network" {
 # Image MongoDB
 resource "docker_image" "mongo_image" {
   name         = "mongo:6.0"
-  keep_locally = false
 }
 
 # Container MongoDB
