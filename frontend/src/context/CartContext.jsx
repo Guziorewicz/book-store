@@ -1,17 +1,19 @@
 import { createContext, useState, useContext } from "react";
 import { fetchOrder, addOrderToCart, removeFromCart } from "../api/orders";
+import Cart from "../models/Cart";
 
 const CartContext = createContext();
 
 export const useCart = () => useContext(CartContext);
 
+
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState({ cart: [] });
+  const [cart, setCart] = useState(new Cart(1, []));
 
   const getCart = async () => {
     try {
       const data = await fetchOrder();
-      setCart(data);
+      setCart(Cart.fromJSON(data)); 
     } catch (error) {
       console.error("Error fetching cart:", error);
     }
@@ -20,7 +22,7 @@ export const CartProvider = ({ children }) => {
   const addToCart = async order => {
     try {
       const response = await addOrderToCart({ order });
-      setCart(response);
+      setCart(Cart.fromJSON(response));
     } catch (error) {
       console.error("Error adding to cart:", error);
     }
@@ -29,7 +31,7 @@ export const CartProvider = ({ children }) => {
   const removeFromCartHandler = async (itemToRemove) => {
     try {
       const response = await removeFromCart({ itemToRemove });
-      setCart(response);
+      setCart(Cart.fromJSON(response));
     } catch (error) {
       console.error("Error removing from cart:", error);
     }

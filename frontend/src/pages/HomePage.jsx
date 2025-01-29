@@ -26,7 +26,7 @@ const HomePage = () => {
                 </div>
                 <div>
                     <h2 className="text-3xl font-semibold text-primary mb-6 font-sans italic">Your order</h2>
-                    <ShoppingCart />
+                    <ShoppingCart />  
                 </div>
             </div>
         </div>

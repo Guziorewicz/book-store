@@ -55,7 +55,6 @@ const BookTable = () => {
         handleCloseModal();
     }, [selectedBook, addToCart, setCart, setBooks]);
 
-
     return (
     <div className="overflow-x-auto bg-white shadow-md rounded-lg min-w-[600px]">    
         <table className="table-auto w-full border-collapse">
@@ -74,7 +73,7 @@ const BookTable = () => {
                       }`}
                     >
                         {book.stock}</td>
-                    <td className="px-4 py-3 text-right">{book.price.toFixed(2)} €</td>
+                    <td className="px-4 py-3 text-right">{book.price.toFixed(2)}</td>
                     <td className="px-4 py-3 text-center">
                         <button 
                             className="text-white px-4 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-150"

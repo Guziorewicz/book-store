@@ -1,5 +1,6 @@
 import { createContext, useState, useContext } from "react";
 import { fetchBooks } from "../api/books";
+import Book from '../models/Book'
 
 const BooksContext = createContext();
 
@@ -11,7 +12,7 @@ export const BooksProvider = ({ children }) => {
   const getBooks = async () => {
     try {
       const data = await fetchBooks();
-      setBooks(data);
+      setBooks(Book.fromJSON(data));
     } catch (error) {
       console.error("Error fetching books:", error);
     }

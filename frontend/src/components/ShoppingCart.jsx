@@ -11,10 +11,6 @@ const ShoppingCart = () => {
 
     const columns = ["Title", "Author", "Amount", "Unit Price", "Action"];
 
-    const totalPrice = useMemo(() => {
-        return cart.cart.reduce((total, element) => total + element.stock * element.price, 0).toFixed(2);
-    }, [cart.cart]); 
-
     const [selectedToDelete, setSelectedToDelete] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -87,7 +83,7 @@ const ShoppingCart = () => {
         )}
         <div className="bg-green-600 text-white border-collapse p-2 flex justify-between items-center">
             <p className="text-white text-center font-bold">
-            {totalPrice} €
+            {cart.getTotalPrice()} €
             </p>
             <div className="bg-green-600 text-center border-collapse">
                 <button 
