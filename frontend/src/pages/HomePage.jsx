@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useBooks } from "../context/BooksContext";
 import { useCart } from "../context/CartContext";
 import BookTable from '../components/BookTable';

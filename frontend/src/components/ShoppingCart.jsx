@@ -1,12 +1,15 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import DeleteFromCart from './ItemDeletion';
 import { useCart } from "../context/CartContext";
 import { useBooks} from "../context/BooksContext";
+import TableHeader from "./TableHeader";
 
 const ShoppingCart = () => {
 
     const { cart, removeFromCartHandler  } = useCart();
     const { setBooks } = useBooks();
+
+    const columns = ["Title", "Author", "Amount", "Unit Price", "Action"];
 
     const totalPrice = useMemo(() => {
         return cart.cart.reduce((total, element) => total + element.stock * element.price, 0).toFixed(2);
@@ -17,10 +20,10 @@ const ShoppingCart = () => {
 
     const [delivery, setDelivery] = useState(false);
 
-    const handleRemoveItemClick = (item) => {
+    const handleRemoveItemClick = useCallback((item) => () => {
         setSelectedToDelete(item);
         setIsModalOpen(true);
-    } 
+    }, []);
 
     const handleCloseModal = () => {
         setSelectedToDelete(null);
@@ -29,15 +32,16 @@ const ShoppingCart = () => {
     
 
     const handleRemoveOrder = useCallback(async () => {
+        const { id, title, stock } = selectedToDelete;
         try {
             await removeFromCartHandler(selectedToDelete);
-            console.log(`Removed ${selectedToDelete.title}`);
+            console.log(`Removed ${title}`);
         } catch (error) {
             console.log("Error with removing", error);
         }
         setBooks((prevBooks) =>
             prevBooks.map((book) =>
-                book.id === selectedToDelete.id ? { ...book, stock: book.stock + selectedToDelete.stock } : book
+                book.id === id ? { ...book, stock: book.stock + stock } : book
             )
         );
     }, [selectedToDelete, removeFromCartHandler, setBooks]);
@@ -55,7 +59,7 @@ const ShoppingCart = () => {
                 <td className="px-4 py-2 text-right">{item.price.toFixed(2)} €</td>
                 <td className="px-4 py-2 text-center">
                     <button 
-                        onClick={() => handleRemoveItemClick(item)}
+                        onClick={handleRemoveItemClick(item)}
                         className="text-red px-4 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-150"
                         aria-label={`Remove ${item.title} from cart`}
                     >❌</button>
@@ -67,15 +71,7 @@ const ShoppingCart = () => {
     return (
     <div className="overflow-x-auto bg-white shadow-md rounded-lg mt-6">    
         <table className="table-auto w-full border-collapse">
-            <thead>
-                <tr className="bg-green-600 text-white">
-                    <th scope="col" className="px-4 py-2 text-left font-semibold">Title</th>
-                    <th scope="col" className="px-4 py-2 text-left font-semibold">Author</th>
-                    <th scope="col" className="px-4 py-2 text-center font-semibold">Amount</th>
-                    <th scope="col" className="px-4 py-2 text-right font-semibold">Unit Price</th>
-                    <th scope="col" className="px-4 py-2 text-center font-semibold">Action</th>
-                </tr>
-            </thead>
+             <TableHeader columns={columns} />
             <tbody>
                 {cartItems}
             </tbody>

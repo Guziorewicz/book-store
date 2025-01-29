@@ -1,9 +1,12 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import AddToCart from './Amount'
 import { useBooks } from "../context/BooksContext";
 import { useCart } from "../context/CartContext";
+import TableHeader from "./TableHeader";
 
 const BookTable = () => {
+
+    const columns = ["Title", "Author", "Pages", "Stock", "Price", "Action"];
 
     const { books, setBooks  } = useBooks();
     const { setCart, addToCart } = useCart();
@@ -16,7 +19,7 @@ const BookTable = () => {
         return books.slice().sort((a, b) => a.title.localeCompare(b.title));
     }, [books]);
 
-    const handleAddToCartClick = useCallback((book) => {
+    const handleAddToCartClick = useCallback((book) => () => {
         setSelectedBook(book);
         setIsModalOpen(true);
     }, []);
@@ -56,16 +59,7 @@ const BookTable = () => {
     return (
     <div className="overflow-x-auto bg-white shadow-md rounded-lg min-w-[600px]">    
         <table className="table-auto w-full border-collapse">
-            <thead>
-                <tr className="bg-green-600 text-white">
-                    <th scope="col" className="px-4 py-3 text-left font-semibold">Title</th>
-                    <th scope="col" className="px-4 py-3 text-left font-semibold">Author</th>
-                    <th scope="col" className="px-4 py-3 text-center font-semibold">Pages</th>
-                    <th scope="col" className="px-4 py-3 text-center font-semibold">Stock</th>
-                    <th scope="col" className="px-4 py-3 text-right font-semibold">Price</th>
-                    <th scope="col" className="px-4 py-3 text-center font-semibold">Action</th>
-                </tr>
-            </thead>
+            <TableHeader columns={columns} />
             <tbody>
                 {sortedBooks.map((book) => (
                     <tr key={book.id} className="border-t hover:bg-green-100 transition duration-150">
@@ -86,8 +80,7 @@ const BookTable = () => {
                             className="text-white px-4 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-150"
                             disabled={book.stock === 0}
                             aria-disabled={book.stock === 0}
-                            onClick={() => handleAddToCartClick(book)}
-                            // onClick={handleAddToCartClick}
+                            onClick={handleAddToCartClick(book)}
                             aria-label={`Add ${book.title} to Cart`}
                             role="button"
                         >🛒</button></td>

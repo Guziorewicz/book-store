@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext } from "react";
 import { fetchOrder, addOrderToCart, removeFromCart } from "../api/orders";
 
 const CartContext = createContext();
@@ -17,7 +17,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const addToCart = async (order) => {
+  const addToCart = async order => {
     try {
       const response = await addOrderToCart({ order });
       setCart(response);
