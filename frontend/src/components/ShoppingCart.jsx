@@ -48,11 +48,11 @@ const ShoppingCart = ({cart, setCart, setBooks, books}) => {
         <table className="table-auto w-full border-collapse">
             <thead>
                 <tr className="bg-green-600 text-white">
-                    <th className="px-4 py-2 text-left font-semibold">Title</th>
-                    <th className="px-4 py-2 text-left font-semibold">Author</th>
-                    <th className="px-4 py-2 text-center font-semibold">Amount</th>
-                    <th className="px-4 py-2 text-right font-semibold">Unit Price</th>
-                    <th className="px-4 py-2 text-center font-semibold">Action</th>
+                    <th scope="col" className="px-4 py-2 text-left font-semibold">Title</th>
+                    <th scope="col" className="px-4 py-2 text-left font-semibold">Author</th>
+                    <th scope="col" className="px-4 py-2 text-center font-semibold">Amount</th>
+                    <th scope="col" className="px-4 py-2 text-right font-semibold">Unit Price</th>
+                    <th scope="col" className="px-4 py-2 text-center font-semibold">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,8 +64,9 @@ const ShoppingCart = ({cart, setCart, setBooks, books}) => {
                     <td className="px-4 py-2 text-right">{item.price.toFixed(2)} €</td>
                     <td className="px-4 py-2 text-center">
                         <button 
-                        onClick={() => handleRemoveItemClick(item)}
-                        className="text-red px-4 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-150"
+                            onClick={() => handleRemoveItemClick(item)}
+                            className="text-red px-4 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-150"
+                            aria-label={`Remove ${item.title} from cart`}
                         >❌</button></td>
                 </tr>
                 ))}
@@ -81,19 +82,23 @@ const ShoppingCart = ({cart, setCart, setBooks, books}) => {
             />
         )}
         <div className="bg-green-600 text-white border-collapse p-2 flex justify-between items-center">
-            <p className="text-white text-center">
+            <p className="text-white text-center font-bold">
             Summary:  {cart.cart.reduce((total, element) => total + element.stock * element.price, 0).toFixed(2)} €
             </p>
             <div className="bg-green-600 text-center border-collapse">
-                <button className="bg-white text-green-600 px-4 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-150"
+                <button 
+                    className="bg-white text-green-600 px-4 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-150"
                     onClick={handleDelivery}
+                    aria-label="Confirm order and proceed to delivery"
+                    role="button"
                 >
                     Make order
                 </button>
             </div>
         </div>
             {
-                delivery && <p className="text-white text-center bg-green-600">UPCOMING</p>
+                delivery && 
+                (<p className="text-green-800 font-bold text-center bg-white p-2 rounded-md shadow-md">UPCOMING</p>)
             }
     </div>
     );

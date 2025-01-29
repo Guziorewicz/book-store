@@ -55,16 +55,16 @@ const BookTable = ({books, setCart, setBooks}) => {
 
 
     return (
-    <div className="overflow-x-auto bg-white shadow-md rounded-lg">    
+    <div className="overflow-x-auto bg-white shadow-md rounded-lg min-w-[600px]">    
         <table className="table-auto w-full border-collapse">
             <thead>
                 <tr className="bg-green-600 text-white">
-                    <th className="px-4 py-3 text-left font-semibold">Title</th>
-                    <th className="px-4 py-3 text-left font-semibold">Author</th>
-                    <th className="px-4 py-3 text-center font-semibold">Pages</th>
-                    <th className="px-4 py-3 text-center font-semibold">Stock</th>
-                    <th className="px-4 py-3 text-right font-semibold">Price</th>
-                    <th className="px-4 py-3 text-center font-semibold">Action</th>
+                    <th scope="col" className="px-4 py-3 text-left font-semibold">Title</th>
+                    <th scope="col" className="px-4 py-3 text-left font-semibold">Author</th>
+                    <th scope="col" className="px-4 py-3 text-center font-semibold">Pages</th>
+                    <th scope="col" className="px-4 py-3 text-center font-semibold">Stock</th>
+                    <th scope="col" className="px-4 py-3 text-right font-semibold">Price</th>
+                    <th scope="col" className="px-4 py-3 text-center font-semibold">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -77,7 +77,7 @@ const BookTable = ({books, setCart, setBooks}) => {
                       className={`px-4 py-3 text-center ${
                         book.stock > 0
                           ? "text-green-600 font-medium"
-                          : "text-red-500 font-medium opacity-50 cursor-not-allowed"
+                          : "text-red-500 font-bold underline opacity-80 cursor-not-allowed"
                       }`}
                     >
                         {book.stock}</td>
@@ -86,7 +86,11 @@ const BookTable = ({books, setCart, setBooks}) => {
                         <button 
                             className="text-white px-4 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-150"
                             disabled={book.stock === 0}
-                            onClick={() => handleAddToCartClick(book)}>🛒</button></td>
+                            aria-disabled={book.stock === 0}
+                            onClick={() => handleAddToCartClick(book)}
+                            aria-label={`Add ${book.title} to Cart`}
+                            role="button"
+                        >🛒</button></td>
                 </tr>
                 ))}
             </tbody>

@@ -47,19 +47,19 @@ const HomePage = () => {
 
 
     if (loadingBooks) {
-        return <p className="text-primary text-center mt-4">Loading data...</p>
+        return <p className="text-primary text-center mt-4" aria-live="polite">Loading data...</p>
     }
 
 
     if (loadingCart) {
-        return <p className="text-primary text-center mt-4">Loading order...</p>
+        return <p className="text-primary text-center mt-4" aria-live="polite">Loading order...</p>
     }
 
     return(
         <div className="bg-gray-100 min-h-screen p-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <h1 className="text-4xl font-extrabold text-primary mb-6 font-serif">Books list</h1>
+                    <h2 className="text-4xl font-extrabold text-primary mb-6 font-serif">Books list</h2>
                     <BookTable books={books} setCart={setCart} setBooks={setBooks}  />
                 </div>
                 <div>
