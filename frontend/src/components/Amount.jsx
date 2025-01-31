@@ -25,7 +25,7 @@ const AddToCart = ({ id, title, stock, isOpen, onClose, onConfirm }) => {
     <Modal
         isOpen={isOpen}
         onRequestClose={onClose}
-        contentLabel="Dodaj do koszyka"
+        contentLabel="Add to cart"
         style={{
             overlay: {
               display: 'flex',
@@ -42,6 +42,11 @@ const AddToCart = ({ id, title, stock, isOpen, onClose, onConfirm }) => {
             },
           }}
     >    
+    <div 
+          data-testid="backdrop"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+          onClick={onClose}
+          >
         <div className="relative bg-white p-6 rounded-lg shadow-lg border border-gray-200">
             <div className="text-center">
                 <button  
@@ -73,6 +78,7 @@ const AddToCart = ({ id, title, stock, isOpen, onClose, onConfirm }) => {
                 >✔ Add to cart</button>
             </div>
         </div>
+    </div>
     </Modal>
     );
 

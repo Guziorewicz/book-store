@@ -55,7 +55,7 @@ test("closes modal on X button click", () => {
 
     fireEvent.click(button);
 
-    expect(handleClose).toHaveBeenCalled(2);
+    expect(handleClose).toHaveBeenCalled();
 });
 
 test("closes modal when clicking on the backdrop", () => {
