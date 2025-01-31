@@ -22,5 +22,10 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/cart-api/, ''), 
       },
-  }}
+    }},
+    test: {
+      globals: true,
+      environment: "jsdom",
+      setupFiles: "./src/setupTests.js",
+    },
 })
