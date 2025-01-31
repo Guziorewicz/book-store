@@ -47,7 +47,7 @@ const ShoppingCart = () => {
     }, []);
 
     const cartItems = useMemo(() => {
-        return cart.cart.map((item) => (
+        return (cart?.cart || []).map((item) => (
             <tr key={item.id} className="border-t hover:bg-green-100 transition duration-150">
                 <td className="px-4 py-2">{item.title}</td>
                 <td className="px-4 py-2">{item.author}</td>
@@ -62,7 +62,7 @@ const ShoppingCart = () => {
                 </td>
             </tr>
         ));
-    }, [cart.cart]);
+    }, [cart?.cart]);
 
     return (
     <div className="overflow-x-auto bg-white shadow-md rounded-lg mt-6">    
@@ -83,7 +83,7 @@ const ShoppingCart = () => {
         )}
         <div className="bg-green-600 text-white border-collapse p-2 flex justify-between items-center">
             <p className="text-white text-center font-bold">
-            {cart.getTotalPrice()} €
+            {cart?.getTotalPrice()} €
             </p>
             <div className="bg-green-600 text-center border-collapse">
                 <button 

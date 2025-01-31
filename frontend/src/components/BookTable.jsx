@@ -16,7 +16,7 @@ const BookTable = () => {
 
 
     const sortedBooks = useMemo(() => {
-        return books.slice().sort((a, b) => a.title.localeCompare(b.title));
+        return (books || []).slice().sort((a, b) => a.title.localeCompare(b.title));
     }, [books]);
 
     const handleAddToCartClick = useCallback((book) => () => {

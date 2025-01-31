@@ -21,7 +21,6 @@ export const addOrderToCart = async ({order}) => {
                 'Content-Type': 'application/json',
             },
         });
-        // console.log("Response from server: ", response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching cart', error);

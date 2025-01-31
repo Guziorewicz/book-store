@@ -58,17 +58,6 @@ test("closes modal on X button click", () => {
     expect(handleClose).toHaveBeenCalled();
 });
 
-test("closes modal when clicking on the backdrop", () => {
-    const handleClose = vi.fn();
-
-    renderComponent({ onClose: handleClose });
-
-    const backdrop = screen.getByTestId("backdrop");
-
-    fireEvent.click(backdrop);
-
-    expect(handleClose).toHaveBeenCalledOnce();
-});
 
 test("Confirm setting onConfirm", () => {
     const handleConfirm = vi.fn();

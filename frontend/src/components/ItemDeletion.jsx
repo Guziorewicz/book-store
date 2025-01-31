@@ -29,12 +29,7 @@ const DeleteFromCart = ({id, title, isOpen, onClose, onConfirm}) => {
                 },
               }}
         >    
-          <div 
-          data-testid="backdrop"
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
-          onClick={onClose}
-          >
-            <div className="text-center relative bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+          <div className="text-center relative bg-white p-6 rounded-lg shadow-lg border border-gray-200">
                 <button 
                   className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 font-bold text-lg"  
                   onClick={onClose}
@@ -48,7 +43,6 @@ const DeleteFromCart = ({id, title, isOpen, onClose, onConfirm}) => {
                   aria-label="Remove from cart"
                 >Remove from cart</button>
             </div>
-          </div>
         </Modal>
         );
 };
